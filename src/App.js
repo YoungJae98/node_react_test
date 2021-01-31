@@ -1,22 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import logo from "./logo.svg";
+import "./App.css";
 
 function App() {
+  const [title, setTitle] = useState("");
+  fetch("http://localhost:3001/api")
+    .then((res) => res.json())
+    .then((data) => setTitle(data.title));
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div>{title ? <h1>{title}</h1> : <h1>loading</h1>}</div>
       </header>
     </div>
   );
